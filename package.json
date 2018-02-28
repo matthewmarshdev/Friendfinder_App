@@ -1,0 +1,25 @@
+{
+  "name": "friendfinder_app",
+  "version": "1.0.0",
+  "description": "friendfinder",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matthewmarshdev/Friendfinder_App.git"
+  },
+  "author": "Matthew Marsh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matthewmarshdev/Friendfinder_App/issues"
+  },
+  "homepage": "https://github.com/matthewmarshdev/Friendfinder_App#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express.js": "^1.0.0",
+    "inquirer": "^5.1.0",
+    "path": "^0.12.7"
+  }
+}
