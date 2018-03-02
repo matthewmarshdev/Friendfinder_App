@@ -6,3 +6,5 @@ var friendData = [
     friendScores: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
   }
 ];
+
+module.exports = (friendData);
