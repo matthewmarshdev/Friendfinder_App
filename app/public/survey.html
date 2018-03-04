@@ -50,17 +50,12 @@
 
                             <div class="form-group">
                                 <label for="reserve-name">Name</label>
-                                <input type="text" class="form-control" id="reserve-name">
+                                <input type="text" class="form-control" id="friend-name">
                             </div>
 
                             <div class="form-group">
-                                <label for="reserve-phone">Photo</label>
-                                <input type="text" class="form-control" id="reserve-phone" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="reserve-unique-id">Unique ID</label>
-                                <input type="text" class="form-control" id="reserve-unique-id" required>
+                                <label for="reserve-photo">Photo</label>
+                                <input type="text" class="form-control" id="friend-photo" required>
                             </div>
                     </div>
                 </div>
@@ -308,7 +303,7 @@
                 <p>
                     <a href="/api/tables">API Table Link</a> |
                     <a href="/api/waitlist">API Wait List</a> |
-                    <a href="https://github.com/afhaque/HotRestaurant">GitHub Repo</a>
+                    <a href="https://github.com/matthewmarshdev/Friendfinder_App">GitHub Repo</a>
                 </p>
             </div>
         </footer>
@@ -331,38 +326,51 @@
         event.preventDefault();
 
         // Here we grab the form elements
-        var newReservation = {
-            customerName: $("#reserve-name").val().trim(),
-            phoneNumber: $("#reserve-phone").val().trim(),
-            customerEmail: $("#reserve-email").val().trim(),
-            customerID: $("#reserve-unique-id").val().trim()
+        var newFriend = {
+            friendName: $("#friend-name").val().trim(),
+            friendPhoto: $("#friend-photo").val().trim(),
+            friendQuestions:[
+                    $("input[name=q1][value=" + value + "]").attr('checked', 'checked'),
+                    $("input[name=q2][value=" + value + "]").attr('checked', 'checked'),
+                    $("input[name=q3][value=" + value + "]").attr('checked', 'checked'),
+                    $("input[name=q4][value=" + value + "]").attr('checked', 'checked'),
+                    $("input[name=q5][value=" + value + "]").attr('checked', 'checked'),
+                    $("input[name=q6][value=" + value + "]").attr('checked', 'checked'),
+                    $("input[name=q7][value=" + value + "]").attr('checked', 'checked'),
+                    $("input[name=q8][value=" + value + "]").attr('checked', 'checked'),
+                    $("input[name=q9][value=" + value + "]").attr('checked', 'checked'),
+                    $("input[name=q10][value=" + value + "]").attr('checked', 'checked'),
+            ]
         };
 
-        console.log(newReservation);
+        console.log(newFriend);
 
         // This line is the magic. It"s very similar to the standard ajax function we used.
         // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
         // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
         // depending on if a tables is available or not.
 
-        $.post("/api/tables", newReservation,
+        $.post("/api/friends", newFriend,
             function (data) {
 
-                // If a table is available... tell user they are booked.
-                if (data) {
-                    alert("Yay! You are officially booked!");
-                }
-
-                // If a table is available... tell user they on the waiting list.
                 else {
-                    alert("Sorry you are on the wait list");
+                    alert("Finish Filling Out the Form, Please. ");
                 }
 
                 // Clear the form when submitting
-                $("#reserve-name").val("");
-                $("#reserve-phone").val("");
-                $("#reserve-email").val("");
-                $("#reserve-unique-id").val("");
+                $("#friend-name").val("");
+                $("#friend-photo").val("");
+                $("input[name=q1][value=" + value + "]").attr('unchecked');
+                $("input[name=q2][value=" + value + "]").attr('unchecked');
+                $("input[name=q3][value=" + value + "]").attr('unchecked');
+                $("input[name=q4][value=" + value + "]").attr('unchecked');
+                $("input[name=q5][value=" + value + "]").attr('unchecked');
+                $("input[name=q6][value=" + value + "]").attr('unchecked');
+                $("input[name=q7][value=" + value + "]").attr('unchecked');
+                $("input[name=q8][value=" + value + "]").attr('unchecked');
+                $("input[name=q9][value=" + value + "]").attr('unchecked');
+                $("input[name=q10][value=" + value + "]").attr('unchecked');
+              
 
             });
 
