@@ -24,10 +24,6 @@
             <br>
 
             <div class="text-center">
-                <a href="/tables">
-                    <button type="button" class="btn btn-lg btn-primary">
-                        <span class="glyphicon glyphicon-list-alt"></span> View Furries!</button>
-                </a>
                 <a href="/">
                     <button type="button" class="btn btn-lg btn-default">
                         <span class="glyphicon glyphicon-home"></span>
@@ -309,11 +305,6 @@
         </footer>
 
     </div>
-
-</body>
-
-</html>
-
 <!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
 <script type="text/javascript">
 
@@ -325,6 +316,24 @@
     $(".submit").on("click", function (event) {
         event.preventDefault();
 
+        function validateForm() {
+            var isValid = true;
+            $(".form-control").each(function() {
+            if ($(this).val() === "") {
+                isValid = false;
+            }
+            });
+
+            $(".chosen-select").each(function() {
+
+            if ($(this).val() === "") {
+                isValid = false;
+            }
+            });
+        return isValid;
+      }
+
+      if(validateForm()){
         // Here we grab the form elements
         var newFriend = {
             friendName: $("#friend-name").val().trim(),
@@ -350,14 +359,13 @@
         // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
         // depending on if a tables is available or not.
 
-        $.post("/api/friends", newFriend,
-            function (data) {
-
-                else {
-                    alert("Finish Filling Out the Form, Please. ");
-                }
-
-                // Clear the form when submitting
+        $.post("/api/friends", newFriend)
+            .then(function (data) {
+                if(data != ""){
+                    console.log(data);
+                    alert("worked...")
+               
+               // Clear the form when submitting
                 $("#friend-name").val("");
                 $("#friend-photo").val("");
                 $("input[name=q1][value=" + value + "]").attr('unchecked');
@@ -370,10 +378,16 @@
                 $("input[name=q8][value=" + value + "]").attr('unchecked');
                 $("input[name=q9][value=" + value + "]").attr('unchecked');
                 $("input[name=q10][value=" + value + "]").attr('unchecked');
-              
-
-            });
-
-    });
+           } else {
+                alert("Please fill out all fields before submitting!");
+           }
+        });
+    }
+});
+      
 
 </script>
+
+
+</body>
+</html>
